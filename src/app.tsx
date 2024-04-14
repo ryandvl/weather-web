@@ -1,7 +1,13 @@
+import { Header } from "./components/header/header";
+import { Search } from "./components/search-input";
+
 export function App() {
   return (
     <>
-      <h1>Hello World</h1>
+      <Header />
+      <main>
+        <Search />
+      </main>
     </>
   );
 }

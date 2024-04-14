@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --light-background-color: #2563eb;
+  --light-text-color: #f4f4f5;
+
+  --dark-background-color: #020617;
+  --dark-text-color: #fafafa;
+
+  --prefers-background-color: var(--light-background-color);
+  --prefers-text-color: var(--light-text-color);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --prefers-background-color: var(--dark-background-color);
+    --prefers-text-color: var(--dark-text-color);
+  }
+}
+
+html {
+  background-color: var(--prefers-background-color);
+  color: var(--prefers-text-color);
+}
+
+html > body {
+  background-color: var(--light-background-color);
+  color: var(--light-text-color);
+}
+
+html.dark > body {
+  background-color: var(--dark-background-color);
+  color: var(--dark-text-color);
+}
