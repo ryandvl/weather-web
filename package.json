@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "repository": {
     "type": "github",
-    "url": "https://github.com/ryandvl/react-counter"
+    "url": "https://github.com/ryandvl/weather-web"
   },
   "author": {
     "name": "ryandvl"
