@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --light-background-color: #2563eb;
-  --light-text-color: #f4f4f5;
+  --light-background-color: #f4f4f5;
+  --light-text-color: #09090b;
 
-  --dark-background-color: #020617;
+  --dark-background-color: #030712;
   --dark-text-color: #fafafa;
 
   --prefers-background-color: var(--light-background-color);
@@ -25,7 +25,7 @@ html {
   color: var(--prefers-text-color);
 }
 
-html > body {
+html:not(.dark) > body {
   background-color: var(--light-background-color);
   color: var(--light-text-color);
 }

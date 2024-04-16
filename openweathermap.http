@@ -1,0 +1,7 @@
+### ADD THIS FILE TO .gitignore!!!
+
+GET https://api.openweathermap.org/geo/1.0/direct?q=sp&limit=5&appId=YOUR_APP_ID
+
+###
+
+GET https://api.openweathermap.org/data/2.5/weather?id=3448439&units=Metric&appId=YOUR_APP_ID

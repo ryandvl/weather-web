@@ -1,4 +1,3 @@
-"use client";
 import { MoonIcon, SunIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
@@ -33,13 +32,13 @@ export default function ThemeSwitcher() {
   return (
     <button
       onClick={handleThemeSwitcher}
-      className="size-10 flex justify-center items-center outline-none border-none focus:bg-teal-400 dark:focus:bg-teal-500 hover:bg-zinc-400 dark:hover:bg-zinc-500 rounded-full cursor-pointer group"
+      className="size-10 flex justify-center items-center outline-none focus:bg-teal-400 dark:focus:bg-teal-500 hover:bg-zinc-600 dark:hover:bg-zinc-500 bg-blue-500 dark:bg-blue-900 rounded-md cursor-pointer group"
     >
       {active ? (
         <MoonIcon
           size={24}
           className={twMerge(
-            "text-zinc-400 group-focus:text-zinc-50",
+            "text-orange-300 group-focus:text-orange-200 fill-current",
             spinIcon
           )}
         />
@@ -47,7 +46,7 @@ export default function ThemeSwitcher() {
         <SunIcon
           size={24}
           className={twMerge(
-            "text-yellow-400 group-focus:text-zinc-950",
+            "text-yellow-300 group-focus:text-yellow-200 fill-current",
             spinIcon
           )}
         />
