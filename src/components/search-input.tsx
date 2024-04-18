@@ -61,21 +61,25 @@ export function SearchInput({ variant }: SearchInputProps) {
     <>
       <dialog
         onClick={handleDialogOnClick}
-        className="bottom-40 w-2/6 rounded-lg p-10 border-2 border-zinc-600 dark:border-zinc-800 bg-slate-300 dark:bg-zinc-950 backdrop:bg-zinc-950/50 transition-transform"
+        className="bottom-40 w-2/6 rounded-lg p-10 border-2 border-zinc-500 dark:border-zinc-800 bg-slate-200 dark:bg-zinc-950 backdrop:bg-zinc-950/50"
         id="search-input"
+        autoCorrect="false"
       >
         <div className="flex flex-col gap-5">
           <div className="flex justify-center items-center gap-4">
-            <SearchIcon size={24} className="text-zinc-400" />
+            <SearchIcon
+              size={24}
+              className="text-zinc-950 dark:text-zinc-400"
+            />
             <input
-              type="text"
+              type="search"
               placeholder="Search..."
               autoFocus
               onChange={(event) => setSearch(event.target.value)}
-              className="w-full bg-transparent outline-none text-zinc-100 placeholder-zinc-500"
+              className="w-full bg-transparent outline-none text-zinc-900 dark:text-zinc-100 placeholder-zinc-500"
             />
           </div>
-          {search.length && queries.length && (
+          {search.length && queries.length ? (
             <>
               <VerticalSeparator length="100%" />
               {queries.map((query, key) => {
@@ -93,21 +97,23 @@ export function SearchInput({ variant }: SearchInputProps) {
                       .filter((q) => q !== "undefined")
                       .join(",")}`}
                     key={key}
-                    className="flex justify-start items-center gap-5 size-full outline-none p-3 focus:bg-lime-500 hover:bg-zinc-600 transition-colors rounded-md"
+                    className="flex justify-start items-center gap-5 size-full outline-none p-3 focus:bg-lime-300 dark:focus:bg-lime-500 hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors rounded-md"
                   >
-                    <span className="w-36 text-white font-bold">
+                    <span className="w-36 text-black dark:text-white font-bold">
                       {query.name ?? "Unknown"}
                     </span>
-                    <span className="w-80 text-zinc-300">
+                    <span className="w-80 text-zinc-700 dark:text-zinc-300">
                       {query.state ?? "Unknown"}
                     </span>
-                    <span className="text-zinc-500 font-semibold">
+                    <span className="text-zinc-600 dark:text-zinc-500 font-semibold">
                       {query.country ?? "Unknown"}
                     </span>
                   </a>
                 );
               })}
             </>
+          ) : (
+            <></>
           )}
         </div>
       </dialog>
