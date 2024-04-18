@@ -6,6 +6,7 @@ import { SearchIcon } from "lucide-react";
 import { fetchGeoAPI } from "../lib/api";
 import { GeocodingResponseData } from "../types/openweathermap-api/weather-response";
 
+import { normalizeString, removeAccents } from "../utils/string-regex";
 import { VerticalSeparator } from "./separators";
 import useDebounceValue from "../hooks/use-debounce-value";
 
@@ -22,13 +23,7 @@ export function SearchInput({ variant }: SearchInputProps) {
   useEffect(() => {
     const executeFunction = async () => {
       const data = await fetchGeoAPI(
-        debouncedSearchTerm
-          .normalize("NFD")
-          .replace(/[\u0300-\u036f]/g, "")
-          .toLowerCase()
-          .replace(/[^\w\s-]/g, "")
-          .replace(/\s+/g, "-")
-          .replace(/test/g, "")
+        normalizeString(debouncedSearchTerm).replace(/test/g, "")
       );
 
       if (data == false) return;
@@ -66,7 +61,7 @@ export function SearchInput({ variant }: SearchInputProps) {
     <>
       <dialog
         onClick={handleDialogOnClick}
-        className="w-2/6 rounded-lg p-3 border-2 border-zinc-600 dark:border-zinc-800 bg-slate-300 dark:bg-zinc-950 backdrop:bg-zinc-950/50 transition-transform"
+        className="bottom-40 w-2/6 rounded-lg p-10 border-2 border-zinc-600 dark:border-zinc-800 bg-slate-300 dark:bg-zinc-950 backdrop:bg-zinc-950/50 transition-transform"
         id="search-input"
       >
         <div className="flex flex-col gap-5">
@@ -84,10 +79,31 @@ export function SearchInput({ variant }: SearchInputProps) {
             <>
               <VerticalSeparator length="100%" />
               {queries.map((query, key) => {
+                const querriesMap = [
+                  encodeURIComponent(removeAccents(query.name ?? "undefined")),
+                  encodeURIComponent(removeAccents(query.state ?? "undefined")),
+                  encodeURIComponent(
+                    removeAccents(query.country ?? "undefined")
+                  ),
+                ];
+
                 return (
-                  // `${query.name},${query.state},${query.country}`
-                  <a href="" key={key} className="size-full">
-                    <span className="text-zinc-50">{query.name}</span>
+                  <a
+                    href={`/?q=${querriesMap
+                      .filter((q) => q !== "undefined")
+                      .join(",")}`}
+                    key={key}
+                    className="flex justify-start items-center gap-5 size-full outline-none p-3 focus:bg-lime-500 hover:bg-zinc-600 transition-colors rounded-md"
+                  >
+                    <span className="w-36 text-white font-bold">
+                      {query.name ?? "Unknown"}
+                    </span>
+                    <span className="w-80 text-zinc-300">
+                      {query.state ?? "Unknown"}
+                    </span>
+                    <span className="text-zinc-500 font-semibold">
+                      {query.country ?? "Unknown"}
+                    </span>
                   </a>
                 );
               })}

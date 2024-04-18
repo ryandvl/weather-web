@@ -28,12 +28,16 @@ export async function fetchGeoAPI(query: string) {
   }
 }
 
-export async function fetchWeatherAPI(id: string) {
+export async function fetchWeatherAPI(id: string, useQuery = false) {
   if (!id.length) return false;
 
   const url = new URL(API_BASE_URL + "/data/2.5/weather");
 
-  url.searchParams.set("id", encodeURIComponent(id));
+  if (useQuery) {
+    url.searchParams.set("q", id);
+  } else {
+    url.searchParams.set("id", encodeURIComponent(id));
+  }
   url.searchParams.set("units", "Metric");
   url.searchParams.set("appid", VITE_OPENWEATHERMAP_API_KEY);
 
@@ -42,7 +46,7 @@ export async function fetchWeatherAPI(id: string) {
 
     const data = (await response.json()) as WeatherResponse;
 
-    if ("cod" in data) return (data as APIErrorData).message;
+    if (data.cod !== 200) return (data as APIErrorData).message;
 
     return data;
   } catch (err) {

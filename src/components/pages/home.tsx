@@ -16,7 +16,7 @@ export function Home() {
           <VerticalSeparator length="50%" stroke="3px" />
 
           <div className="flex gap-3">
-            <span className="max-w-96 text-zinc-700 dark:text-zinc-300">
+            <span className="max-w-96 text-zinc-800 dark:text-zinc-300">
               Search for cities or states to view about climate! Explore
               interactive maps and articles, tap in the{" "}
               <span className="font-semibold text-blue-700 dark:text-blue-500">
