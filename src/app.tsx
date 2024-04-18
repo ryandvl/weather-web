@@ -18,6 +18,7 @@ export function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState<WeatherResponseData | null>(null);
   const [error, setError] = useState<"internal" | "not-found" | null>(null);
+  const [page, setPage] = useState("home");
 
   useEffect(() => {
     const fetchAPI = async () => {
@@ -29,10 +30,13 @@ export function App() {
 
       if (responseData == false) {
         setError("internal");
+        setPage("not-found");
       } else if (typeof responseData == "string") {
         setError("not-found");
+        setPage("not-found");
       } else {
         setData(responseData as WeatherResponseData);
+        setPage("informations");
       }
 
       setIsLoading(false);
@@ -41,7 +45,7 @@ export function App() {
     fetchAPI();
   }, [id]);
 
-  if (searchParams.size > 0) {
+  if (searchParams.size > 1) {
     const url = new URL(window.location.toString());
 
     url.search = "";
@@ -55,13 +59,13 @@ export function App() {
 
   return (
     <div className="flex flex-col gap-24">
-      <Header />
+      <Header showSearchInput={isLoading || page !== "home"} />
       {(() => {
         if (isLoading) {
           return <Loading />;
-        } else if (error) {
+        } else if (page == "not-found") {
           return <NotFound error={error} />;
-        } else if (data) {
+        } else if (page == "informations" && data) {
           return <Informations data={data} />;
         } else {
           return <Home />;

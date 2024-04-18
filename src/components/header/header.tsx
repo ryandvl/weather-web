@@ -1,8 +1,12 @@
 import ThemeSwitcher from "./theme-switcher";
 import { HorizontalSeparator } from "../separators";
-import { Search } from "../search-input";
+import { SearchInput } from "../search-input";
 
-export function Header() {
+interface HeaderProps {
+  showSearchInput?: boolean;
+}
+
+export function Header({ showSearchInput = true }: HeaderProps) {
   return (
     <header className="flex w-full h-20 justify-between items-center pt-16 px-32">
       <a href="/" className="w-40 flex justify-center items-center gap-2">
@@ -10,9 +14,7 @@ export function Header() {
         <span className="font-bold">Weather</span>
       </a>
 
-      <div className="w-64 p-1 focus:size-1 bg-zinc-900 rounded-lg">
-        <Search />
-      </div>
+      {showSearchInput && <SearchInput variant="header" />}
 
       <div className="flex justify-center items-center gap-6">
         <div className="flex justify-center items-center gap-3">

@@ -1,13 +1,14 @@
 interface SeparatorsProps {
   length?: string;
+  stroke?: string;
 }
 
-export function HorizontalSeparator({ length }: SeparatorsProps) {
+export function HorizontalSeparator({ length, stroke }: SeparatorsProps) {
   return (
     <div
       className="bg-zinc-500 dark:bg-zinc-700"
       style={{
-        width: "1px",
+        width: stroke ?? "1px",
         height: length ?? "2rem", // 8px
         borderRadius: "0.375rem", // 6px
       }}
@@ -15,12 +16,12 @@ export function HorizontalSeparator({ length }: SeparatorsProps) {
   );
 }
 
-export function VerticalSeparator({ length }: SeparatorsProps) {
+export function VerticalSeparator({ length, stroke }: SeparatorsProps) {
   return (
     <div
       className="bg-zinc-500 dark:bg-zinc-700"
       style={{
-        height: "1px",
+        height: stroke ?? "1px",
         width: length ?? "2rem", // 8px
         borderRadius: "0.375rem", // 6px
       }}

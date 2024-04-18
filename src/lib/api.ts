@@ -1,5 +1,7 @@
 import {
   APIErrorData,
+  GeoResponse,
+  GeocodingResponseData,
   WeatherResponse,
 } from "../types/openweathermap-api/weather-response";
 
@@ -7,7 +9,7 @@ const API_BASE_URL = "https://api.openweathermap.org";
 const { VITE_OPENWEATHERMAP_API_KEY } = import.meta.env;
 
 export async function fetchGeoAPI(query: string) {
-  if (!query.length) return;
+  if (!query.length) return false;
 
   const url = new URL(API_BASE_URL + "/geo/1.0/direct");
 
@@ -15,10 +17,15 @@ export async function fetchGeoAPI(query: string) {
   url.searchParams.set("limit", "5");
   url.searchParams.set("appid", VITE_OPENWEATHERMAP_API_KEY);
 
-  const response = await fetch(url);
-  const data = await response.json();
+  try {
+    const response = await fetch(url);
 
-  return data;
+    const data = (await response.json()) as GeoResponse;
+
+    return data as GeocodingResponseData[];
+  } catch (err) {
+    return false;
+  }
 }
 
 export async function fetchWeatherAPI(id: string) {
@@ -35,7 +42,7 @@ export async function fetchWeatherAPI(id: string) {
 
     const data = (await response.json()) as WeatherResponse;
 
-    if (data.cod == 404) return (data as APIErrorData).message;
+    if ("cod" in data) return (data as APIErrorData).message;
 
     return data;
   } catch (err) {

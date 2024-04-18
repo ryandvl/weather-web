@@ -32,7 +32,7 @@ export default function ThemeSwitcher() {
   return (
     <button
       onClick={handleThemeSwitcher}
-      className="size-10 flex justify-center items-center outline-none focus:bg-teal-400 dark:focus:bg-teal-500 hover:bg-zinc-600 dark:hover:bg-zinc-500 bg-blue-500 dark:bg-blue-900 rounded-md cursor-pointer group"
+      className="size-10 flex justify-center items-center outline-none focus:bg-teal-400 dark:focus:bg-teal-500 hover:bg-zinc-600 dark:hover:bg-zinc-500 bg-zinc-950 dark:bg-zinc-800 rounded-full cursor-pointer group"
     >
       {active ? (
         <MoonIcon

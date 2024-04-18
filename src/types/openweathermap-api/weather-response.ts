@@ -39,9 +39,18 @@ export interface WeatherResponseData {
   cod: number;
 }
 
+export interface GeocodingResponseData {
+  name: string;
+  lat: number;
+  lon: number;
+  country: string;
+  state: string;
+}
+
 export interface APIErrorData {
   cod: string;
   message: string;
 }
 
+export type GeoResponse = GeocodingResponseData[] | APIErrorData;
 export type WeatherResponse = WeatherResponseData | APIErrorData;
