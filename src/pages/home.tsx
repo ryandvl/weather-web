@@ -8,7 +8,6 @@ import { VerticalSeparator } from "../components/separators";
 
 import { WeatherResponseData } from "../types/openweathermap-api/weather-response";
 import { fetchWeatherAPI } from "../lib/api";
-import { getWeatherCondition } from "../utils/weather-conditions";
 
 export function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -57,7 +56,7 @@ export function Home() {
           </div>
         </div>
 
-        <div className="w-72 h-full rounded-md flex justify-start items-start p-10 bg-white/80 dark:bg-zinc-50/90 border-2 border-zinc-400 dark:border-zinc-800 transition-colors duration-500">
+        <div className="w-72 h-full rounded-md flex justify-start items-start p-10 bg-blue-200 dark:bg-blue-600 border-2 border-zinc-400 dark:border-zinc-800 transition-colors duration-500">
           {isLoading ? (
             <div className="w-full flex justify-start items-center gap-2">
               <div className="w-full h-16 bg-zinc-300 rounded-md" />
@@ -68,12 +67,16 @@ export function Home() {
                 <MapPinIcon size={48} className="text-yellow-400" />
                 <div className="flex flex-col">
                   <div className="flex justify-start items-center gap-2">
-                    <span className="text-zinc-950 font-bold text-2xl">
+                    <span className="text-zinc-950 dark:text-zinc-200 font-bold text-2xl">
                       Paris
                     </span>
-                    <span className="text-zinc-900 text-base">FR</span>
+                    <span className="text-zinc-900 dark:text-zinc-50 text-base">
+                      FR
+                    </span>
                   </div>
-                  <span className="text-zinc-900 text-base">Ile-de-France</span>
+                  <span className="text-zinc-900 dark:text-zinc-50 text-base">
+                    Ile-de-France
+                  </span>
                 </div>
               </div>
 
@@ -81,12 +84,12 @@ export function Home() {
 
               <div className="flex flex-col justify-center items-center">
                 <img
-                  src={getWeatherCondition(data!.weather[0].icon)}
+                  src={`/weather-conditions/${data!.weather[0].icon}@2x.png`}
                   className="size-32"
                 ></img>
 
-                <span className="text-2xl font-bold text-zinc-950">
-                  {data!.main.temp.toFixed()}°c
+                <span className="text-2xl font-bold text-zinc-950 dark:text-zinc-50">
+                  {Math.floor(data!.main.temp)}°c
                 </span>
               </div>
             </div>
