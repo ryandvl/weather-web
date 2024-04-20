@@ -1,11 +1,17 @@
 import { MapPinIcon } from "lucide-react";
-import { WeatherResponseData } from "../../types/openweathermap-api/weather-response";
+
+import { setTitle } from "../utils/set-title";
+
+import { WeatherResponseData } from "../types/openweathermap-api/weather-response";
+import { getWeatherCondition } from "../utils/weather-conditions";
 
 interface InformationsProps {
   data: WeatherResponseData;
 }
 
 export function Informations({ data }: InformationsProps) {
+  setTitle(`${data.name}, ${data.sys.country}`);
+
   return (
     <main className="flex justify-center items-center">
       <div className="bg-blue-400/10 rounded-xl p-12">
@@ -14,6 +20,8 @@ export function Informations({ data }: InformationsProps) {
           <span className="font-extrabold text-black dark:text-white">
             {data.name}
           </span>
+          <img src={getWeatherCondition(data!.weather[0].icon)}></img>
+          <span className="text-zinc-500">{data!.main.temp.toFixed()}°c</span>
         </div>
       </div>
     </main>

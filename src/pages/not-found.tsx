@@ -1,7 +1,7 @@
 import { MapPinOffIcon } from "lucide-react";
 
-import { setTitle } from "../../utils/set-title";
-import { BackToHomepage } from "../back-to-homepage";
+import { setTitle } from "../utils/set-title";
+import { BackToHomepage } from "../components/back-to-homepage";
 
 interface NotFoundProps {
   error: "internal" | "not-found" | null;

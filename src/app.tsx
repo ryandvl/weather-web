@@ -4,12 +4,12 @@ import { useSearchParams } from "react-router-dom";
 import { fetchWeatherAPI } from "./lib/api";
 
 import { Header } from "./components/header/header";
-import { Loading } from "./components/pages/loading";
-import { NotFound } from "./components/pages/not-found";
-import { Informations } from "./components/pages/informations";
+import { Loading } from "./pages/loading";
+import { NotFound } from "./pages/not-found";
+import { Informations } from "./pages/informations";
 
 import { WeatherResponseData } from "./types/openweathermap-api/weather-response";
-import { Home } from "./components/pages/home";
+import { Home } from "./pages/home";
 import { removeAccents } from "./utils/string-regex";
 
 export function App() {
